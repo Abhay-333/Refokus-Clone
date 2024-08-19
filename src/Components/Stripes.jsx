@@ -35,7 +35,7 @@ const Stripes = () => {
 
   ]
     return (
-    <div className='flex mt-[3.5vw]'>
+    <div className='flex mt-[4vw]'>
         {stripeData.map((item, index)=><Stripe key={index} val={item} />)}
     </div>
   )
