@@ -2,6 +2,7 @@ import Navbar from './Components/Navbar.jsx'
 import Work from './Components/Work.jsx'
 import Stripes from './Components/Stripes.jsx'
 import Products from './Components/Products.jsx'
+import Marquees from './Components/Marquees.jsx'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Work />
       <Stripes/>
       <Products/>
+      <Marquees/>
     </div>
   )
 }
