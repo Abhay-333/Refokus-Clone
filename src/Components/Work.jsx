@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useMotionValue, useMotionValueEvent, useScroll } from "framer-motion";
 
 const Work = () => {
-  const images = [
+  const { scrollYProgress } = useScroll();
+
+  const [images, setImages] = useState([
     {
       url: `https://cdn.prod.website-files.com/664dc8b6bc52b504509197f0/6697d7ef6620081c6c647958_Singularity%20-%2016%209%20(B)-p-1080.webp`,
       top: "50%",
@@ -39,7 +42,43 @@ const Work = () => {
       left: "53%",
       isActive: false,
     },
-  ];
+  ]);
+
+  scrollYProgress.on("change", (data) => {
+    const showImages = (arr) => {
+      setImages((prev) =>
+        prev.map((item, index) =>
+          arr.indexOf(index) === -1
+            ? { ...item, isActive: false }
+            : { ...item, isActive: true }
+        )
+      );
+    };
+    switch (Math.floor(data * 100)) {
+      case 0:
+        showImages([]);
+        break;
+      case 1:
+        showImages([0]);
+        break;
+      case 2:
+        showImages([0, 1]);
+        break;
+      case 3:
+        showImages([0, 1, 2]);
+        break;
+      case 4:
+        showImages([0, 1, 2, 3]);
+        break;
+      case 5:
+        showImages([0, 1, 2, 3, 4]);
+        break;
+      case 6:
+        showImages([0, 1, 2, 3, 4, 5]);
+        break;
+    }
+  });
+
   return (
     <div className=" w-full text-white">
       <div className="max-w-screen-xlmx-auto text-center relative">
@@ -51,7 +90,7 @@ const Work = () => {
             (image, index) =>
               image.isActive && (
                 <img
-                key={index}
+                  key={index}
                   className="absolute w-[20%] rounded-xl translate-x-[-50%]"
                   style={{ top: image.top, left: image.left }}
                   src={image.url}
